@@ -8,8 +8,23 @@ import plotly.express as px
 import base64
 import os
 
-# Load the pre-trained model
-model = load_model(r"./models/re-trained_model.h5")
+# Define a function to load the model
+@st.cache_resource
+def load_model_from_path(model_path):
+    try:
+        return load_model(model_path)
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        return None
+
+# Path to the model file
+model_path = './models/re-trained_model.h5'
+if os.path.exists(model_path):
+    model = load_model_from_path(model_path)
+    if model:
+        st.success("Model loaded successfully.")
+else:
+    st.error("Model file does not exist.")
 
 classes = ['blues', 'classical', 'country', 'disco', 'hiphop', 'jazz', 'metal', 'pop', 'reggae', 'rock']
 
