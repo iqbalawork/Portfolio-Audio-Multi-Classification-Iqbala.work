@@ -9,22 +9,27 @@ import base64
 import os
 
 # Define a function to load the model
-@st.cache_resource
-def load_model_from_path(model_path):
-    try:
-        return load_model(model_path)
-    except Exception as e:
-        st.error(f"Error loading model: {e}")
-        return None
+#@st.cache_resource(show_spinner=False)
+#def load_model_from_path(model_path):
+#    try:
+#        model = load_model(model_path)
+#        return model
+#    except Exception as e:
+#        st.error(f"Error loading model: {e}")
+#        return None
+#
+## Path to the model file
+#model_path = './models/re-trained_model.h5'
+#
+## Check if the model file exists
+#if os.path.exists(model_path):
+#    model = load_model_from_path(model_path)
+#    if model:
+#        st.success("Model loaded successfully.")
+#else:
+#    st.error("Model file does not exist.")
 
-# Path to the model file
-model_path = './models/re-trained_model.h5'
-if os.path.exists(model_path):
-    model = load_model_from_path(model_path)
-    if model:
-        st.success("Model loaded successfully.")
-else:
-    st.error("Model file does not exist.")
+model = load_model('./models/re-trained_model.h5')
 
 classes = ['blues', 'classical', 'country', 'disco', 'hiphop', 'jazz', 'metal', 'pop', 'reggae', 'rock']
 
@@ -104,7 +109,7 @@ else:
     sample_data = st.checkbox('Use a sample data')
     if sample_data:
         # Load the sample data
-        sample_path = 'data\The Neighbourhood - Sweater Weather.mp3'
+        sample_path = '.\data\The Neighbourhood - Sweater Weather.mp3'
         st.audio(sample_path, format='audio/mp3')
         st.markdown('''**Credit:** The sample audio is taken from [The Neighbourhood - Sweater Weather](https://www.youtube.com/watch?v=GCdwKhTtNNw&list=RDMM&start_radio=1)''')
         X_sample= load_and_preprocess_data(sample_path)
