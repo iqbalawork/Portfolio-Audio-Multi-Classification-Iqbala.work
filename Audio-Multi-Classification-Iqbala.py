@@ -119,9 +119,9 @@ else:
     sample_data = st.checkbox('Use a sample data')
     if sample_data:
         # Load the sample data
-        sample_path = '.\data\The Neighbourhood - Sweater Weather.mp3'
+        sample_path = '.\data\The DeLong Incident - Craig MacArthur.mp3'
         st.audio(sample_path, format='audio/mp3')
-        st.markdown('''**Credit:** The sample audio is taken from [The Neighbourhood - Sweater Weather](https://www.youtube.com/watch?v=GCdwKhTtNNw&list=RDMM&start_radio=1)''')
+        st.markdown('''**Credit:** The sample audio is taken from Youtube Audio Library''')
         X_sample= load_and_preprocess_data(sample_path)
         predicted_category_sample = model_prediction(X_sample)
         st.success(f"The most likely category: **{predicted_category_sample}**")
